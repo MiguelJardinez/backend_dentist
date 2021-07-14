@@ -13,7 +13,6 @@ app.use(cors());
 app.use(express.json());
 dotenv.config();
 conectionDB();
-const apiVersion = process.env.API_VERSION;
 
 //Utilizar rutas
 app.use(`${process.env.API_VERSION}/usuarios`, userRoute);
