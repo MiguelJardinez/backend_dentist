@@ -2,40 +2,36 @@ import User, {UserIT} from '../models/user.model';
 
 export const createUser = async (userData: UserIT): Promise<UserIT | undefined | string> => {
   try {
-    const user: UserIT | null = await new User(userData).save();
-    return `Se ha creado el usuario ${user.nombre}`;
+    return await new User(userData).save();
   } catch (error) {
     console.log(error);
     return undefined;
   }
 }
 
-export const getOneUser = async (id: string): Promise<UserIT | undefined> => {
+export const getOneUser = async (id: string): Promise<UserIT | null> => {
   try {
-    const user: UserIT | null = await User.findById(id);
-    return user!;
+    return await User.findById(id);
   } catch (error) {
     console.log(error);
-    return undefined;
+    return null;
   }
 };
 
-export const getAllUsers = async (): Promise<UserIT[] | undefined> => {
+export const getAllUsers = async (): Promise<UserIT[] | null> => {
   try {
-    const users: UserIT[] | null = await User.find();
-    return users!;
+    return await User.find();
   } catch (error) {
     console.log(error);
-    return undefined;
+    return null;
   }
 };
 
-export const deleteUser = async (id: string): Promise<string | undefined> => {
+export const deleteUser = async (id: string): Promise<UserIT | null> => {
   try {
-    const user: UserIT | null = await User.findOneAndDelete({id: id})
-    return `Se elimino al usuario ${user?.nombre}`
+    return await User.findOneAndDelete({id: id});
   } catch (error) {
     console.log(error);
-    return undefined;
+    return null;
   }
 }

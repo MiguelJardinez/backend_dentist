@@ -1,7 +1,7 @@
-import {model, Schema} from 'mongoose';
+import {model, Schema, Document} from 'mongoose';
 import bcrypt from 'bcrypt';
 
-export interface UserIT {
+export interface UserIT extends Document {
   nombre: string;
   email: string;
   password: string;
@@ -39,18 +39,22 @@ const UserModel = new Schema<UserIT>({
     type: String,
     trim: true,
   },
+  rol: {
+    type: Schema.Types.ObjectId,
+    ref: 'Roles',
+  }
 },
 {
   timestamps: true,
-})
+});
 
 //Función para hashear password
-UserModel.pre('save', (next) => {
-  const user: UserIT = this!;
-  console.log(user);
+UserModel.pre('save', function (next){
+  const user = this;
+  console.log(user.password);
   user.password = bcrypt.hashSync(user.password, 10);
-  console.log(user);
+  console.log('Password hasheada', user.password);
   next();
 });
 
-export default model<UserIT>('User', UserModel);
+export default model<UserIT>('Usuario', UserModel);

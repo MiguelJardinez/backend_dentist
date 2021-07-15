@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import crearRoles from '../utils/crearRoles';
 
 const conectionDB = async () => {
   try {
@@ -8,6 +9,9 @@ const conectionDB = async () => {
       useUnifiedTopology: true,
     });
     console.log('Base de datos conectada');
+
+    //Creando los roles de para la aplicación
+    crearRoles();
   } catch (error) {
     console.log('No se logro conectar con la base de datos');
     console.log(error);

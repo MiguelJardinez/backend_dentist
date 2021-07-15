@@ -11,6 +11,7 @@ const app = express();
 //Configuraciones del servidor y DB
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({extended: true}))
 dotenv.config();
 conectionDB();
 

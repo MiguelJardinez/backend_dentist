@@ -1,0 +1,4 @@
+enum RoleEnum {
+  DENTISTA='DENTISTA',
+  PACIENTE='PACIENTE',
+}
