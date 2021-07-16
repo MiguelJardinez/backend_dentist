@@ -9,7 +9,7 @@ export interface PacienteIT extends Document {
   email: string;
   phone: string;
   password: string;
-  atencion?: Schema.Types.ObjectId[];
+  trabajos?: Schema.Types.ObjectId[];
   alergias: Schema.Types.ObjectId[];
   dentista: Schema.Types.ObjectId;
 }
@@ -40,7 +40,7 @@ const PacienteSchema = new Schema<PacienteIT>({
   password: {
     type: String,
   },
-  atencion: {
+  trabajos: {
     type: String,
   },
   alergias: {

@@ -1,4 +1,4 @@
-import {model, Schema, Document, Model} from 'mongoose';
+import {model, Schema, Document} from 'mongoose';
 import bcrypt from 'bcrypt';
 import crypto from 'crypto';
 
@@ -9,6 +9,7 @@ export interface UserIT extends Document {
   photo?: string;
   resetToken?: string;
   restartDate?: Date;
+  trabajos: Schema.Types.ObjectId;
 };
 
 //Documents
@@ -53,6 +54,10 @@ const UserSchema = new Schema<UserIT>({
   verified: {
     type: Boolean,
     default: false,
+  },
+  trabajos: {
+    type: Schema.Types.ObjectId,
+    ref: 'Trabajos'
   }
 },
 {
