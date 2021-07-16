@@ -5,6 +5,7 @@ import cors from 'cors';
 
 //Rutas de la aplicación
 import userRoute from './routes/users.route';
+import authRouter from './routes/auth.route';
 
 const app = express();
 
@@ -17,6 +18,7 @@ conectionDB();
 
 //Utilizar rutas
 app.use(`${process.env.API_VERSION}/usuarios`, userRoute);
+app.use(`${process.env.API_VERSION}/auth`, authRouter);
 
 //Inicializando el servidor
 app.listen(process.env.PORT, () => {
