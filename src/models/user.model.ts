@@ -9,7 +9,7 @@ export interface UserIT extends Document {
   photo?: string;
   resetToken?: string;
   restartDate?: Date;
-  trabajos: Schema.Types.ObjectId;
+  trabajos?: Schema.Types.ObjectId[];
 };
 
 //Documents
@@ -33,6 +33,7 @@ const UserSchema = new Schema<UserIT>({
   password: {
     type: String,
     trim: true,
+    required: true,
     minLength: 6
   },
   photo: {
@@ -49,6 +50,7 @@ const UserSchema = new Schema<UserIT>({
   },
   rol: {
     type: Schema.Types.ObjectId,
+    required: true,
     ref: 'Roles',
   },
   verified: {
@@ -56,8 +58,8 @@ const UserSchema = new Schema<UserIT>({
     default: false,
   },
   trabajos: {
-    type: Schema.Types.ObjectId,
-    ref: 'Trabajos'
+    type: [Schema.Types.ObjectId],
+    ref: 'Trabajos',
   }
 },
 {

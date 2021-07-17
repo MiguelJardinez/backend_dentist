@@ -6,6 +6,7 @@ import cors from 'cors';
 //Rutas de la aplicación
 import userRoute from './routes/users.route';
 import authRouter from './routes/auth.route';
+import pacienteRouter from './routes/paciente.route';
 
 const app = express();
 
@@ -17,8 +18,9 @@ dotenv.config();
 conectionDB();
 
 //Utilizar rutas
-app.use(`${process.env.API_VERSION}/usuarios`, userRoute);
 app.use(`${process.env.API_VERSION}/auth`, authRouter);
+app.use(`${process.env.API_VERSION}/usuarios`, userRoute);
+app.use(`${process.env.API_VERSION}/paciente`, pacienteRouter)
 
 //Inicializando el servidor
 app.listen(process.env.PORT, () => {
