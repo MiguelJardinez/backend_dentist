@@ -1,5 +1,14 @@
 import {Paciente, PacienteIT} from '../models/pacient.model';
 
+export const createPatient = async (data: PacienteIT): Promise<PacienteIT | null> => {
+  try {
+    return await new Paciente(data).save();
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
 export const getPatientById = async (id: string): Promise<PacienteIT | null> => {
   try {
     return await Paciente.findById(id);

@@ -8,7 +8,7 @@ export interface UserIT extends Document {
   password: string;
   photo?: string;
   resetToken?: string;
-  restartDate?: Date;
+  restartDate?: string;
   trabajos?: Schema.Types.ObjectId[];
 };
 

@@ -20,7 +20,7 @@ conectionDB();
 //Utilizar rutas
 app.use(`${process.env.API_VERSION}/auth`, authRouter);
 app.use(`${process.env.API_VERSION}/usuarios`, userRoute);
-app.use(`${process.env.API_VERSION}/paciente`, pacienteRouter)
+app.use(`${process.env.API_VERSION}/pacientes`, pacienteRouter)
 
 //Inicializando el servidor
 app.listen(process.env.PORT, () => {

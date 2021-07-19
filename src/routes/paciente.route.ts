@@ -14,8 +14,8 @@ const router = Router();
 router.get('/obtener', verifyKey, verifyTokenMid, obtenerPacientes);
 router.get('/obtener-paciente/:id', verifyKey, verifyTokenMid, obtenerPacienteById);
 
-router.put('/modificar/:id', verifyKey, verifyTokenMid, modificarPaciente);
 router.post('/crear', verifyKey, verifyTokenMid, crearPaciente);
+router.put('/modificar/:id', verifyKey, verifyTokenMid, modificarPaciente);
 router.delete('/eliminar/:id', verifyKey, verifyTokenMid, eliminarPaciente);
 
 export default router;

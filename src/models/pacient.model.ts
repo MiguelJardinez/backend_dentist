@@ -1,16 +1,18 @@
-import { string } from 'joi';
+import { func, string } from 'joi';
 import {Schema, model, Document} from 'mongoose';
+import bcrypt from 'bcrypt';
 
 export interface PacienteIT extends Document {
   name: string;
   age: string;
-  image: string;
+  image?: string;
   birthday: Date;
   email: string;
   phone: string;
-  password: string;
+  password?: string;
   trabajos?: Schema.Types.ObjectId[];
   dentista: Schema.Types.ObjectId;
+  firstTime: boolean;
 }
 
 const PacienteSchema = new Schema<PacienteIT>({
@@ -20,14 +22,13 @@ const PacienteSchema = new Schema<PacienteIT>({
     required: true,
   },
   age: {
-    type: string,
+    type: String,
     required: true,
     trim: true,
   },
   image: {
-    type: string,
+    type: String,
     trim: true,
-    required: true,
   },
   birthday: {
     type: Date,
@@ -48,7 +49,6 @@ const PacienteSchema = new Schema<PacienteIT>({
   password: {
     type: String,
     trim: true,
-    required: true,
     minLength: 6
   },
   trabajos: {
@@ -59,8 +59,18 @@ const PacienteSchema = new Schema<PacienteIT>({
     type: Schema.Types.ObjectId,
     ref: 'Usuario',
   },
+  firstTime: {
+    type: Boolean,
+    default: true,
+  }
 },{
   timestamps: true,
+});
+
+PacienteSchema.pre('save', function(next) {
+  const patient: PacienteIT = this;
+  patient.password = bcrypt.hashSync(patient.password!, 10);
+  next()
 });
 
 export const Paciente = model('Paciente', PacienteSchema)
