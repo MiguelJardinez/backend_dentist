@@ -9,10 +9,12 @@ export interface UserIT extends Document {
   photo?: string;
   resetToken?: string;
   restartDate?: string;
+  startWork: number;
+  finishWork: number
   trabajos?: Schema.Types.ObjectId[];
 };
 
-const UserSchema = new Schema<UserIT>({
+const DenstistSchema = new Schema<UserIT>({
   nombre: {
     type: String,
     trim: true,
@@ -62,11 +64,11 @@ const UserSchema = new Schema<UserIT>({
 });
 
 //Función para hashear password
-UserSchema.pre('save', function (next){
+DenstistSchema.pre('save', function (next){
   const user = this;
   user.resetToken = crypto.randomBytes(30).toString('hex');
   user.password = bcrypt.hashSync(user.password, 10);
   next();
 });
 
-export const Usuario = model<UserIT>('Usuario', UserSchema);
+export const Dentista = model<UserIT>('Dentista', DenstistSchema);

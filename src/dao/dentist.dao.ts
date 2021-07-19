@@ -1,11 +1,11 @@
-import {UserIT, Usuario} from '../models/user.model';
+import {UserIT, Dentista} from '../models/dentist.model';
 import {Response} from 'express';
 import {ObjectId, Schema} from 'mongoose';
 import {Trabajos} from '../models/trabajos.model';
 
 export const createUser = async (userData: UserIT): Promise<UserIT | undefined> => {
   try {
-    return await new Usuario(userData).save();
+    return await new Dentista(userData).save();
   } catch (error) {
     console.log(error);
     return undefined;
@@ -14,7 +14,7 @@ export const createUser = async (userData: UserIT): Promise<UserIT | undefined> 
 
 export const getUserById = async (id: Schema.Types.ObjectId): Promise<UserIT | null> => {
   try {
-    return await Usuario.findById(id);
+    return await Dentista.findById(id);
   } catch (error) {
     console.log(error);
     return null;
@@ -23,7 +23,7 @@ export const getUserById = async (id: Schema.Types.ObjectId): Promise<UserIT | n
 
 export const getUserByEmail = async (email: string): Promise<UserIT | null> => {
   try {
-    return await Usuario.findOne({email});
+    return await Dentista.findOne({email});
   } catch (error) {
     console.log(error);
     return null;
@@ -32,7 +32,7 @@ export const getUserByEmail = async (email: string): Promise<UserIT | null> => {
 
 export const getAllUsers = async (): Promise<UserIT[] | null> => {
   try {
-    return await Usuario.find();
+    return await Dentista.find();
   } catch (error) {
     console.log(error);
     return null;
@@ -41,7 +41,7 @@ export const getAllUsers = async (): Promise<UserIT[] | null> => {
 
 export const deleteUser = async (id: string): Promise<UserIT | null> => {
   try {
-    return await Usuario.findOneAndDelete({id: id});
+    return await Dentista.findOneAndDelete({id: id});
   } catch (error) {
     console.log(error);
     return null;
@@ -50,7 +50,7 @@ export const deleteUser = async (id: string): Promise<UserIT | null> => {
 
 export const updateUser = async (id: string, data: object) => {
   try {
-    return await Usuario.findByIdAndUpdate(id, data, {new: true});
+    return await Dentista.findByIdAndUpdate(id, data, {new: true});
   } catch (error) {
     console.log(error);
   }
@@ -74,11 +74,11 @@ export const checkCodes = (codeParams: String, codeUser: string): boolean => {
 
 export const addWorkProfile = async (workId: ObjectId, userId: ObjectId): Promise<boolean> => {
   try {
-    const dentista = await Usuario.findById(userId);
+    const dentista = await Dentista.findById(userId);
     if (!dentista) return false;
 
     const trabajos = dentista?.trabajos;
-    await Usuario.findByIdAndUpdate(dentista?._id, {trabajos: [...trabajos!, workId]}, {new: true});
+    await Dentista.findByIdAndUpdate(dentista?._id, {trabajos: [...trabajos!, workId]}, {new: true});
     return true;
     
   } catch (error) {

@@ -1,3 +1,4 @@
+import { ObjectId } from 'mongoose';
 import {Paciente, PacienteIT} from '../models/pacient.model';
 
 export const createPatient = async (data: PacienteIT): Promise<PacienteIT | null> => {
@@ -9,7 +10,7 @@ export const createPatient = async (data: PacienteIT): Promise<PacienteIT | null
   }
 }
 
-export const getPatientById = async (id: string): Promise<PacienteIT | null> => {
+export const getPatientById = async (id: ObjectId): Promise<PacienteIT | null> => {
   try {
     return await Paciente.findById(id);
   } catch (error) {
@@ -58,3 +59,12 @@ export const updatePatient = async (id: string, data: object): Promise<PacienteI
     return null;
   }
 };
+
+export const getPatientByEmail = async (email: string): Promise<PacienteIT | null> => {
+  try {
+    return await Paciente.findOne({email});
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}

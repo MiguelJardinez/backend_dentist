@@ -1,14 +1,14 @@
 import {Response, Request} from 'express';
 import {signToken} from '../../utils/token';
-import {UserIT} from '../../models/user.model';
+import {UserIT} from '../../models/dentist.model';
 import {comparePassword} from '../../utils/password';
-import {createUser, getUserByEmail, handleError, checkCodes, updateUser} from '../../dao/user.dao';
+import {createUser, getUserByEmail, handleError, checkCodes, updateUser} from '../../dao/dentist.dao';
 import {sendMail} from '../../config/nodemailer';
 
 interface authIT {
   email: string;
   password: string;
-};
+}
 
 export const loguearUsuario = async (req: Request, res: Response) => {
   const authData = req.body as authIT;
@@ -19,7 +19,7 @@ export const loguearUsuario = async (req: Request, res: Response) => {
         mensaje: 'Usuario o contraseña incorrecta'
       });
       return;
-    };
+    }
 
     const isCorretPassword = comparePassword(authData.password, usuario?.password);
     if (!isCorretPassword) {
@@ -27,7 +27,7 @@ export const loguearUsuario = async (req: Request, res: Response) => {
         mensaje: 'Usuario o contraseña incorrecta'
       });
       return;
-    };
+    }
 
     const token = signToken(usuario?.id);
     res.json({

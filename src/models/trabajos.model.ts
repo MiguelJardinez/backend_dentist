@@ -10,7 +10,7 @@ export interface TrabajoIT {
 const TrabajosSchema = new Schema({
   dentista: {
     type: Schema.Types.ObjectId,
-    ref: 'Usuario',
+    ref: 'Dentista',
     required: true,
   },
   tratamiento: {

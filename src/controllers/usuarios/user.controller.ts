@@ -1,7 +1,7 @@
 import {Request, Response} from 'express';
 import {
   getUserById, handleError
-} from '../../dao/user.dao';
+} from '../../dao/dentist.dao';
 import {
   createWork,
   deleteWork,
@@ -12,8 +12,8 @@ import {
 } from '../../dao/trabajos.dao';
 import {
   addWorkProfile
-} from '../../dao/user.dao';
-import {UserIT} from '../../models/user.model';
+} from '../../dao/dentist.dao';
+import {UserIT} from '../../models/dentist.model';
 import {TrabajoIT} from '../../models/trabajos.model';
 import mongoose, { ObjectId, Schema } from 'mongoose';
 

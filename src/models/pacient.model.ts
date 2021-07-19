@@ -1,4 +1,3 @@
-import { func, string } from 'joi';
 import {Schema, model, Document} from 'mongoose';
 import bcrypt from 'bcrypt';
 
@@ -8,6 +7,7 @@ export interface PacienteIT extends Document {
   image?: string;
   birthday: Date;
   email: string;
+  rol: Schema.Types.ObjectId;
   phone: string;
   password?: string;
   trabajos?: Schema.Types.ObjectId[];
@@ -62,6 +62,11 @@ const PacienteSchema = new Schema<PacienteIT>({
   firstTime: {
     type: Boolean,
     default: true,
+  },
+  rol: {
+    type: Schema.Types.ObjectId,
+    ref: 'Roles',
+    default: '60ef7d31fa33811cf22f3153'
   }
 },{
   timestamps: true,

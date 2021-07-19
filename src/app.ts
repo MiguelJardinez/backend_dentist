@@ -7,6 +7,7 @@ import cors from 'cors';
 import userRoute from './routes/users.route';
 import authRouter from './routes/auth.route';
 import pacienteRouter from './routes/paciente.route';
+import authPatientRouter from './routes/auth-patient.route';
 
 const app = express();
 
@@ -21,6 +22,7 @@ conectionDB();
 app.use(`${process.env.API_VERSION}/auth`, authRouter);
 app.use(`${process.env.API_VERSION}/usuarios`, userRoute);
 app.use(`${process.env.API_VERSION}/pacientes`, pacienteRouter)
+app.use(`${process.env.API_VERSION}/auth/patients`, authPatientRouter)
 
 //Inicializando el servidor
 app.listen(process.env.PORT, () => {
