@@ -1,6 +1,7 @@
-import {Schema, model, Document} from 'mongoose';
+import {Schema, model, Document, ObjectId} from 'mongoose';
 
-export interface TrabajoIT extends Document {
+export interface TrabajoIT {
+  _id?: ObjectId;
   dentista: Schema.Types.ObjectId;
   tratamiento: Schema.Types.ObjectId;
   precio: number;
@@ -17,7 +18,7 @@ const TrabajosSchema = new Schema({
     ref: 'tratamiento',
     required: true,
   },
-  precios: {
+  precio: {
     type: Number,
     default: 0,
   },

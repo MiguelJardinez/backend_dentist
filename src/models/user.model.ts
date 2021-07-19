@@ -12,12 +12,6 @@ export interface UserIT extends Document {
   trabajos?: Schema.Types.ObjectId[];
 };
 
-//Documents
-interface userDocument extends UserIT {
-  findByEmail(email: string): () => UserIT;
-}
-
-
 const UserSchema = new Schema<UserIT>({
   nombre: {
     type: String,
@@ -60,6 +54,7 @@ const UserSchema = new Schema<UserIT>({
   trabajos: {
     type: [Schema.Types.ObjectId],
     ref: 'Trabajos',
+    default: []
   }
 },
 {
@@ -74,4 +69,4 @@ UserSchema.pre('save', function (next){
   next();
 });
 
-export const Usuario = model<userDocument>('Usuario', UserSchema);
+export const Usuario = model<UserIT>('Usuario', UserSchema);

@@ -1,5 +1,7 @@
 import {UserIT, Usuario} from '../models/user.model';
 import {Response} from 'express';
+import {ObjectId, Schema} from 'mongoose';
+import {Trabajos} from '../models/trabajos.model';
 
 export const createUser = async (userData: UserIT): Promise<UserIT | undefined> => {
   try {
@@ -10,7 +12,7 @@ export const createUser = async (userData: UserIT): Promise<UserIT | undefined> 
   }
 }
 
-export const getUserById = async (id: string): Promise<UserIT | null> => {
+export const getUserById = async (id: Schema.Types.ObjectId): Promise<UserIT | null> => {
   try {
     return await Usuario.findById(id);
   } catch (error) {
@@ -64,6 +66,21 @@ export const checkCodes = (codeParams: String, codeUser: string): boolean => {
   try {
     const validCode = codeParams.toString() === codeUser.toString() ? true  : false
     return validCode;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+}
+
+export const addWorkProfile = async (workId: ObjectId, userId: ObjectId): Promise<boolean> => {
+  try {
+    const dentista = await Usuario.findById(userId);
+    if (!dentista) return false;
+
+    const trabajos = dentista?.trabajos;
+    await Usuario.findByIdAndUpdate(dentista?._id, {trabajos: [...trabajos!, workId]}, {new: true});
+    return true;
+    
   } catch (error) {
     console.log(error);
     return false;

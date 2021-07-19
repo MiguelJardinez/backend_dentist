@@ -15,9 +15,10 @@ const router = Router();
 router.get('/perfil', verifyKey, verifyTokenMid, obtenerPerfil);
 router.get('/obtener-trabajos', verifyKey, verifyTokenMid, obtenerTrabajos);
 
-router.post('/agregar-trabajo', verifyKey, verifyTokenMid, agregarTrabajo);
-router.put('/actualizar-trabajo', verifyKey, verifyTokenMid, actualizarTrabajo);
-router.put('/actualizar-perfil', verifyKey, verifyTokenMid, actualizarPerfil);
+router.post('/agregar-trabajo/', verifyKey, verifyTokenMid, agregarTrabajo);
+router.put('/actualizar-trabajo/:id', verifyKey, verifyTokenMid, actualizarTrabajo);
 router.delete('/eliminar-trabajo/:id', verifyKey, verifyTokenMid, eliminarTrabajo);
+
+router.put('/actualizar-perfil', verifyKey, verifyTokenMid, actualizarPerfil);
 
 export default router;

@@ -1,8 +1,9 @@
 import jwt, { JwtPayload } from 'jsonwebtoken';
+import { Schema } from 'mongoose';
 
 
 export interface UserTokenIT extends JwtPayload {
-  id: string;
+  id: Schema.Types.ObjectId;
 }
 
 export const signToken = (id: string) => {
