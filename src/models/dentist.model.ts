@@ -9,8 +9,9 @@ export interface UserIT extends Document {
   photo?: string;
   resetToken?: string;
   restartDate?: string;
-  startWork: number;
-  finishWork: number
+  startWork: string;
+  finishWork: string;
+  daysLabor: String[];
   trabajos?: Schema.Types.ObjectId[];
 };
 
@@ -46,8 +47,8 @@ const DenstistSchema = new Schema<UserIT>({
   },
   rol: {
     type: Schema.Types.ObjectId,
-    required: true,
     ref: 'Roles',
+    default: '60f611895efb710d6e69d2b9',
   },
   verified: {
     type: Boolean,
@@ -57,7 +58,21 @@ const DenstistSchema = new Schema<UserIT>({
     type: [Schema.Types.ObjectId],
     ref: 'Trabajos',
     default: []
-  }
+  },
+  finishWork: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  startWork: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  daysLabor: {
+    type: [String],
+    default: ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo']
+  },
 },
 {
   timestamps: true,

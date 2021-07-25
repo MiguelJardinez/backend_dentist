@@ -60,7 +60,7 @@ export const agregarTrabajo = async (req: Request, res: Response) => {
     const newWork = await createWork(dataWorksend);
 
     //Actualizando el perfil para añadir nuevo trabajo
-    await addWorkProfile(newWork!.tratamiento, newWork?.dentista!);
+    await addWorkProfile(newWork!._id!, newWork?.dentista!);
 
     res.json({mensaje: `Trabajo nuevo creado`});
   } catch (error) {

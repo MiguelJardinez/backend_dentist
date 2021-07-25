@@ -2,17 +2,12 @@ import {Schema, model, Document, ObjectId} from 'mongoose';
 
 export interface TrabajoIT {
   _id?: ObjectId;
-  dentista: Schema.Types.ObjectId;
   tratamiento: Schema.Types.ObjectId;
+  dentista: Schema.Types.ObjectId;
   precio: number;
 }
 
 const TrabajosSchema = new Schema({
-  dentista: {
-    type: Schema.Types.ObjectId,
-    ref: 'Dentista',
-    required: true,
-  },
   tratamiento: {
     type: Schema.Types.ObjectId,
     ref: 'tratamiento',
